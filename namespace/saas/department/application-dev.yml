@@ -19,7 +19,7 @@ spring:
         url: http://localhost:8081
 
   datasource:
-    url: jdbc:mysql://mysql-master:3306/commerce
+    url: jdbc:mysql://localhost:3307/commerce
     username: john.doe
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
