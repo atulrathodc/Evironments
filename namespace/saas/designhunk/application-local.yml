@@ -10,7 +10,7 @@ spring:
       port: 6379
       password: MyStrongPassword
   datasource:
-    url: jdbc:mysql://mysql-master:3307/commerce
+    url: jdbc:mysql://localhost:3307/commerce
     username: john.doe
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -50,7 +50,7 @@ spring:
       uri: http://127.0.0.1:8200
       token: hvs.TBbcfeYxzpH8yXRTvZtQJjeJ
       kv:
-        enabled: true
+        enabled: false
         backend: secret
         default-context: example
 
