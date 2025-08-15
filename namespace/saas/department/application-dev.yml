@@ -19,7 +19,7 @@ spring:
         url: http://localhost:8081
 
   datasource:
-    url: jdbc:mysql://localhost:3307/mydatabase
+    url: jdbc:mysql://mysql:3306/mydatabase
     username: user
     password: user-password
     driver-class-name: com.mysql.cj.jdbc.Driver
