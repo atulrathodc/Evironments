@@ -2,7 +2,7 @@ custom:
   property1: value updated
 server:
   port: 9001
-
+brokers: kafka:9092
 spring:
   profiles:
     active: dev
