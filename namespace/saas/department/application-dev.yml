@@ -60,9 +60,6 @@ spring:
     allow-bean-definition-overriding: true
     banner-mode: off
 
-  kafka:
-    bootstrap-servers: localhost:9092
-
   cloud:
     vault:
       uri: http://127.0.0.1:8200
