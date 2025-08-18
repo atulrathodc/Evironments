@@ -3,6 +3,8 @@ custom:
 server:
   port: 9001
 
+brokers: localhost:9092
+
 spring:
   profiles:
     active: dev
