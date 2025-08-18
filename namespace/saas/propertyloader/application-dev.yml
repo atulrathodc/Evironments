@@ -10,5 +10,5 @@ spring:
         default-context: example
 my:
   db:
-    username: ${vault:my-db#username}
-    password: ${vault:my-db#password}
+    username: "${vault:my-db#username}"
+    password: "${vault:my-db#password}"
