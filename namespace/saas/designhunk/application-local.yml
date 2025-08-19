@@ -104,4 +104,5 @@ resilience4j:
       myService:
         maxAttempts: 3
         waitDuration: 2s
-
+custom:
+  property1: value updated
