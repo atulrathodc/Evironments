@@ -80,6 +80,10 @@ my:
   framework:
     enabled: true
     apiKey: abc-123-secret
+  db:
+    username: "${vault:my-db#username3}"
+    password: "${vault:my-db#password}"
+
 
 management:
   endpoint:
@@ -109,8 +113,3 @@ resilience4j:
       myService:
         maxAttempts: 3
         waitDuration: 2s
-my:
-  db:
-    username: "${vault:my-db#username3}"
-    password: "${vault:my-db#password}"
-
