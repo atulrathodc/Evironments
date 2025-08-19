@@ -24,6 +24,7 @@ spring:
     url: jdbc:mysql://localhost:3307/mydatabase
     username: user
     password: user-password
+#    password: "${vault:my-db#password}"
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -108,4 +109,8 @@ resilience4j:
       myService:
         maxAttempts: 3
         waitDuration: 2s
+my:
+  db:
+    username: "${vault:my-db#username3}"
+    password: "${vault:my-db#password}"
 
