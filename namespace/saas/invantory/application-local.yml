@@ -1,7 +1,7 @@
 server:
-  port: 9002
+  port: 9004
 
-brokers: localhost:29092
+brokers: localhost:9092
 
 spring:
   profiles:
