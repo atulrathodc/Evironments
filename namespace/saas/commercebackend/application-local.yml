@@ -43,6 +43,7 @@ spring:
     charset: UTF-8
     expose-spring-macro-helpers: true
   main:
+    web-application-type: reactive
     allow-circular-references: true
     allow-bean-definition-overriding: true
   cloud:
