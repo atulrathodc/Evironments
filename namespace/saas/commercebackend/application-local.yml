@@ -67,8 +67,6 @@ spring:
           uri: http://localhost:8083
           predicates:
             - Path=/payment/**
-#          filters:
-#            - AddRequestHeader=X-CSRF-TOKEN, #{request.headers['X-CSRF-TOKEN']}
       globalcors:
         corsConfigurations:
           '[/**]':
