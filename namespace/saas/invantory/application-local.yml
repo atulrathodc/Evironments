@@ -6,6 +6,9 @@ brokers: localhost:9092
 spring:
   profiles:
     active: dev
+  security:
+    jwt:
+      secret: my-shared-secret-123
   data:
     redis:
       host: localhost
