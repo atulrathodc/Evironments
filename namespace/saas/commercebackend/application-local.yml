@@ -68,7 +68,10 @@ spring:
           predicates:
             - Path=/payment/**
           filters:
-            - AddRequestHeader=Authorization, #{request.headers['Authorization']}
+            - name: AddRequestHeader
+              args:
+                name: Authorization
+                value: "#{request.headers['Authorization']}"
       globalcors:
         corsConfigurations:
           '[/**]':
