@@ -84,6 +84,10 @@ logging:
     org:
       springframework:
         security: DEBUG
+    org.apache.kafka.clients.NetworkClient: ERROR
+    org.apache.kafka.clients.producer.ProducerConfig: ERROR
+    org.apache.kafka.clients.consumer.ConsumerConfig: ERROR
+    org.apache.kafka.clients: ERROR
 
 support:
   email: atulrathodc@gmail.com
