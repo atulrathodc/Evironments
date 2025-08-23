@@ -8,7 +8,7 @@ spring:
     active: dev
   security:
     jwt:
-      secret: my-shared-secret-123
+      secret: my-super-secret-key-my-super-secret-key
   data:
     redis:
       host: localhost
