@@ -7,10 +7,8 @@ spring:
   profiles:
     active: dev
   security:
-    oauth2:
-      resourceserver:
-        jwt:
-          secret: my-shared-secret-123   # ✅ same secret in all services
+    jwt:
+      secret: my-shared-secret-123   # ✅ same secret in all services
   data:
     redis:
       host: localhost
