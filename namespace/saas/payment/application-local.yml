@@ -6,6 +6,11 @@ brokers: localhost:9092
 spring:
   profiles:
     active: dev
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret: my-shared-secret-123   # ✅ same secret in all services
   data:
     redis:
       host: localhost
@@ -110,3 +115,4 @@ resilience4j:
         waitDuration: 2s
 custom:
   property1: value updated
+
