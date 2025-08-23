@@ -1,28 +1,18 @@
 server:
-  port: 9005
-
-brokers: localhost:9092
-
+  port: 9002
+brokers: kafka:9092
 spring:
   profiles:
     active: dev
-  security:
-    jwt:
-      secret: my-super-secret-key-my-super-secret-key
-    oauth2:
-      resourceserver:
-        jwt:
-          secret: my-super-secret-key-my-super-secret-key
-          jws-algorithm: HS256# ✅ same secret in all services
   data:
     redis:
       host: localhost
       port: 6379
       password: MyStrongPassword
   datasource:
-    url: jdbc:mysql://localhost:3309/mydatabase
+    url: jdbc:mysql://mysql:3306/mydatabase
     username: user
-    password: mypass
+    password: user-password
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -53,11 +43,14 @@ spring:
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
+  kafka:
+    bootstrap-servers: localhost:9092
   cloud:
     vault:
       uri: http://127.0.0.1:8200
+      token: hvs.TBbcfeYxzpH8yXRTvZtQJjeJ
       kv:
-        enabled: false
+        enabled: true
         backend: secret
         default-context: example
 
@@ -65,11 +58,7 @@ logging:
   level:
     org:
       springframework:
-        security: INFO
-    org.apache.kafka.clients.NetworkClient: ERROR
-    org.apache.kafka.clients.producer.ProducerConfig: ERROR
-    org.apache.kafka.clients.consumer.ConsumerConfig: ERROR
-    org.apache.kafka.clients: ERROR
+        security: DEBUG
 
 support:
   email: atulrathodc@gmail.com
@@ -116,6 +105,4 @@ resilience4j:
       myService:
         maxAttempts: 3
         waitDuration: 2s
-custom:
-  property1: value updated
 

@@ -1,26 +1,18 @@
 server:
-  port: 9005
+  port: 9006
 
 brokers: localhost:9092
 
 spring:
   profiles:
     active: dev
-  security:
-    jwt:
-      secret: my-super-secret-key-my-super-secret-key
-    oauth2:
-      resourceserver:
-        jwt:
-          secret: my-super-secret-key-my-super-secret-key
-          jws-algorithm: HS256# ✅ same secret in all services
   data:
     redis:
       host: localhost
       port: 6379
       password: MyStrongPassword
   datasource:
-    url: jdbc:mysql://localhost:3309/mydatabase
+    url: jdbc:mysql://localhost:3310/mydatabase
     username: user
     password: mypass
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -65,11 +57,7 @@ logging:
   level:
     org:
       springframework:
-        security: INFO
-    org.apache.kafka.clients.NetworkClient: ERROR
-    org.apache.kafka.clients.producer.ProducerConfig: ERROR
-    org.apache.kafka.clients.consumer.ConsumerConfig: ERROR
-    org.apache.kafka.clients: ERROR
+        security: DEBUG
 
 support:
   email: atulrathodc@gmail.com
@@ -118,4 +106,3 @@ resilience4j:
         waitDuration: 2s
 custom:
   property1: value updated
-
