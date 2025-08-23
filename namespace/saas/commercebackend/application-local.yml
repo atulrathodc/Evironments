@@ -67,6 +67,8 @@ spring:
           uri: http://localhost:9005
           predicates:
             - Path=/payment/**
+          filters:
+            - StripPrefix=1
       globalcors:
         corsConfigurations:
           '[/**]':
