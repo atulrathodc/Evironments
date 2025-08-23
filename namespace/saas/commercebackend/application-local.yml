@@ -59,16 +59,22 @@ spring:
           uri: http://localhost:9004
           predicates:
             - Path=/inventory/**
+          filters:
+            - StripPrefix=1   # removes /inventory before forwarding
+
         - id: product-service
           uri: http://localhost:9006
           predicates:
             - Path=/order/**
+          filters:
+            - StripPrefix=1   # removes /order before forwarding
+
         - id: payment-service
           uri: http://localhost:9005
           predicates:
             - Path=/payment/**
           filters:
-            - StripPrefix=1
+            - StripPrefix=1   # removes /payment before forwarding
       globalcors:
         corsConfigurations:
           '[/**]':
