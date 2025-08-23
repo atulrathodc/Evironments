@@ -57,7 +57,7 @@ logging:
   level:
     org:
       springframework:
-        security: DEBUG
+        security: INFO
     org.apache.kafka.clients.NetworkClient: ERROR
     org.apache.kafka.clients.producer.ProducerConfig: ERROR
     org.apache.kafka.clients.consumer.ConsumerConfig: ERROR
