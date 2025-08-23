@@ -67,11 +67,6 @@ spring:
           uri: http://localhost:9005
           predicates:
             - Path=/payment/**
-          filters:
-            - name: AddRequestHeader
-              args:
-                name: Authorization
-                value: "#{request.headers['Authorization']}"
       globalcors:
         corsConfigurations:
           '[/**]':
