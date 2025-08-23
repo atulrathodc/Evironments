@@ -8,7 +8,11 @@ spring:
     active: dev
   security:
     jwt:
-      secret: my-super-secret-key-my-super-secret-key  # ✅ same secret in all services
+      secret: my-super-secret-key-my-super-secret-key
+    oauth2:
+      resourceserver:
+        jwt:
+          secret: my-super-secret-key-my-super-secret-key   # ✅ same secret in all services
   data:
     redis:
       host: localhost
