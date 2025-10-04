@@ -2,8 +2,10 @@ server:
   port: 9005
 
 brokers: localhost:9092
-
 spring:
+  kafka:
+    admin:
+      fail-fast: false
   profiles:
     active: dev
   security:
