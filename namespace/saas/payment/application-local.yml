@@ -1,7 +1,7 @@
 server:
   port: 9005
 
-brokers: localhost:9092
+brokers: localhost:29092
 spring:
   kafka:
     admin:
