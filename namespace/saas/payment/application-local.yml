@@ -3,6 +3,8 @@ server:
 
 brokers: localhost:29092
 spring:
+  application:
+    name: my-client-service
   kafka:
     admin:
       fail-fast: false
