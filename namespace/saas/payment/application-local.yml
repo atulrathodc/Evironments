@@ -96,16 +96,6 @@ my:
     enabled: true
     apiKey: abc-123-secret
 management:
-  endpoints:
-    web:
-      exposure:
-        include: prometheus
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-        step: 10s
-management:
   tracing:
     sampling:
       probability: 1.0   # capture all traces
