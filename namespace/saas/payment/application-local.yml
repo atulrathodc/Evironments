@@ -4,7 +4,7 @@ server:
 brokers: localhost:29092
 spring:
   application:
-    name: my-client-service
+    name: payment
   kafka:
     admin:
       fail-fast: false
