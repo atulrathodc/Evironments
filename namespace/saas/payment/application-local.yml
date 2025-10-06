@@ -5,6 +5,8 @@ brokers: localhost:29092
 spring:
   application:
     name: payment
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   kafka:
     admin:
       fail-fast: false
@@ -98,11 +100,15 @@ management:
   tracing:
     sampling:
       probability: 1.0   # capture all traces
-  otlp:
-    tracing:
-      endpoint: http://localhost:4317   # sends to Tempo
-    endpoint: http://localhost:4317
-    protocol: grpc
+  zipkin:
+    enabled: true
+    base-url: http://localhost:3200/api/traces
+    sender: web
+#  otlp:
+#    tracing:
+#      endpoint: http://localhost:4317   # sends to Tempo
+#    endpoint: http://localhost:4317
+#    protocol: grpc
   endpoint:
     prometheus:
       enabled: true
