@@ -95,6 +95,12 @@ my:
     apiKey: abc-123-secret
 
 management:
+  tracing:
+    sampling:
+      probability: 1.0   # capture all traces
+  otlp:
+    tracing:
+      endpoint: http://localhost:4317   # sends to Tempo
   endpoint:
     prometheus:
       enabled: true
@@ -106,7 +112,7 @@ management:
     web:
       base-path: /actuator
       exposure:
-        include: health,info,refresh
+        include: health,info,refresh,prometheus
 
 resilience4j:
   circuitbreaker:
@@ -134,4 +140,5 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${instanceId:${random.value}}
+
 
