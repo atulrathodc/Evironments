@@ -98,6 +98,7 @@ my:
 management:
   server:
     port: 9000  # fixed metrics port
+    address: 0.0.0.0
   tracing:
     sampling:
       probability: 1.0   # capture all traces
