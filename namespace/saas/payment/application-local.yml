@@ -101,6 +101,8 @@ management:
   otlp:
     tracing:
       endpoint: http://localhost:4317   # sends to Tempo
+    endpoint: http://localhost:4317
+    protocol: grpc
   endpoint:
     prometheus:
       enabled: true
