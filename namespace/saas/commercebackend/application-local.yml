@@ -4,6 +4,8 @@ server:
 brokers: localhost:9092
 
 spring:
+  application:
+    name: commercebackend
   profiles:
     active: dev
   security:
@@ -150,4 +152,13 @@ resilience4j:
         waitDuration: 2s
 custom:
   property1: value updated
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
 
