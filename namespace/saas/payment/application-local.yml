@@ -96,6 +96,8 @@ my:
     enabled: true
     apiKey: abc-123-secret
 management:
+  server:
+    port: 9000  # fixed metrics port
   tracing:
     sampling:
       probability: 1.0   # capture all traces
