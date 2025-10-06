@@ -95,7 +95,16 @@ my:
   framework:
     enabled: true
     apiKey: abc-123-secret
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        step: 10s
 management:
   tracing:
     sampling:
@@ -109,18 +118,16 @@ management:
 #      endpoint: http://localhost:4317   # sends to Tempo
 #    endpoint: http://localhost:4317
 #    protocol: grpc
-  endpoint:
-    prometheus:
-      enabled: true
-  metrics:
-    export:
-      prometheus:
-        enabled: true
   endpoints:
     web:
       base-path: /actuator
       exposure:
         include: health,info,refresh,prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        step: 10s
 
 resilience4j:
   circuitbreaker:
@@ -148,5 +155,4 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${instanceId:${random.value}}
-
 
