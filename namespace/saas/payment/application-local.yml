@@ -119,7 +119,7 @@ management:
     web:
       base-path: /actuator
       exposure:
-        include: *
+        include: "*"
 #        include: health,info,refresh,prometheus
   metrics:
     export:
