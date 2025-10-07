@@ -105,7 +105,8 @@ management:
       probability: 1.0   # capture all traces
   otlp:
     tracing:
-      endpoint: http://host.docker.internal:4317
+#      endpoint: http://host.docker.internal:4317
+      endpoint: http://localhost:4317
       export:
         enabled: true
     metrics:
