@@ -100,12 +100,16 @@ management:
     port: 9000  # fixed metrics port
     address: 0.0.0.0
   tracing:
+    enabled: true
     sampling:
       probability: 1.0   # capture all traces
-  zipkin:
-    enabled: true
-    base-url: http://localhost:3200/api/traces
-    sender: web
+    otlp:
+      tracing:
+        endpoint: http://localhost:4317  # or Tempo endpoint
+#  zipkin:
+#    enabled: true
+#    base-url: http://localhost:3200/api/traces
+#    sender: web
 #  otlp:
 #    tracing:
 #      endpoint: http://localhost:4317   # sends to Tempo
@@ -115,7 +119,8 @@ management:
     web:
       base-path: /actuator
       exposure:
-        include: health,info,refresh,prometheus
+        include: *
+#        include: health,info,refresh,prometheus
   metrics:
     export:
       prometheus:
