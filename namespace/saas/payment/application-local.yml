@@ -103,9 +103,20 @@ management:
     enabled: true
     sampling:
       probability: 1.0   # capture all traces
-    otlp:
-      tracing:
-        endpoint: http://host.docker.internal:4317  # or Tempo endpoint
+  otlp:
+    tracing:
+      endpoint: http://host.docker.internal:4317
+      export:
+        enabled: true
+    metrics:
+      export:
+        enabled: false  # disable OTLP metrics export
+
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        step: 10s
 #  zipkin:
 #    enabled: true
 #    base-url: http://localhost:3200/api/traces
@@ -121,12 +132,6 @@ management:
       exposure:
         include: "*"
 #        include: health,info,refresh,prometheus
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-        step: 10s
-
 resilience4j:
   circuitbreaker:
     instances:
