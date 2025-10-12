@@ -112,11 +112,6 @@ management:
     metrics:
       export:
         enabled: false  # disable OTLP metrics export
-
-  metrics:
-    export:
-      prometheus:
-        enabled: true
         step: 10s
 #  zipkin:
 #    enabled: true
