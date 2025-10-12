@@ -104,8 +104,10 @@ management:
   otlp:
     tracing:
       enabled: true
-      endpoint: http://localhost:4317
-      protocol: grpc
+#      endpoint: http://localhost:4317
+#      protocol: grpc
+      endpoint: http://localhost:55681
+      protocol: http/protobuf
       export:
         enabled: true
     metrics:
