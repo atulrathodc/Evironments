@@ -96,18 +96,15 @@ my:
     enabled: true
     apiKey: abc-123-secret
 management:
-  server:
-    port: 9000  # fixed metrics port
-    address: 0.0.0.0
   tracing:
     enabled: true
     sampling:
-      probability: 1.0   # capture all traces
+      probability: 1.0
+
   otlp:
-   tracing:
-    otlp:
+    tracing:
       enabled: true
-      endpoint: http://host.docker.internal:3200
+      endpoint: http://host.docker.internal:4317
       protocol: grpc
       export:
         enabled: true
