@@ -104,9 +104,11 @@ management:
     sampling:
       probability: 1.0   # capture all traces
   otlp:
-    tracing:
-#      endpoint: http://host.docker.internal:4317
-      endpoint: http://localhost:4317
+   tracing:
+    otlp:
+      enabled: true
+      endpoint: http://host.docker.internal:3200
+      protocol: grpc
       export:
         enabled: true
     metrics:
