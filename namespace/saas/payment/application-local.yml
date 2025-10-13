@@ -50,12 +50,16 @@ spring:
 #    username: root123
 #    password: mypass
 #    driver-class-name: com.mysql.cj.jdbc.Driver
+#  datasource:
+#    url: jdbc:mysql://mysql3:3306/mydatabase?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+#    username: root
+#    password: root123
+#    driver-class-name: com.mysql.cj.jdbc.Driver
   datasource:
-    url: jdbc:mysql://mysql3:3306/mydatabase?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/mydatabase?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: root123
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -128,11 +132,28 @@ my:
     enabled: true
     apiKey: abc-123-secret
 management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+  observations:
+    key-values:
+      application: payment
   tracing:
-    enabled: true
-    otlp:
-      endpoint: http://localhost:4318/v1/traces
-      transport: http
+    sampling:
+      probability: 1.0
+#management:
+#  tracing:
+#    enabled: true
+#    otlp:
+#      endpoint: http://localhost:4318/v1/traces
+#      transport: http
 #management:
 #  tracing:
 #    enabled: true
@@ -160,12 +181,12 @@ management:
 ##      endpoint: http://localhost:4317   # sends to Tempo
 ##    endpoint: http://localhost:4317
 ##    protocol: grpc
-  endpoints:
-    web:
-      base-path: /actuator
-      exposure:
-        include: "*"
-#        include: health,info,refresh,prometheus
+#  endpoints:
+#    web:
+#      base-path: /actuator
+#      exposure:
+#        include: "*"
+##        include: health,info,refresh,prometheus
 resilience4j:
   circuitbreaker:
     instances:
@@ -186,7 +207,8 @@ custom:
 eureka:
   client:
     service-url:
-      defaultZone: http://serviceregistry:8761/eureka/
+#      defaultZone: http://serviceregistry:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
   instance:
