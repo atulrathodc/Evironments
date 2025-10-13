@@ -8,7 +8,7 @@ spring:
       enabled: true
       exporter:
         otlp:
-          endpoint: http://tempo:55681/v1/traces
+          endpoint: http://tempo:4318/v1/traces
           protocol: http/protobuf
   application:
     name: payment
