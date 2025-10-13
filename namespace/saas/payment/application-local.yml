@@ -11,17 +11,18 @@ spring:
 #      attributes:
 #        service.name: my-springboot-app        # Service name for traces
   # OpenTelemetry configuration (handled by starter)
-otel:
-  otlp:
-    endpoint: http://localhost:4318/v1/traces  # Tempo HTTP OTLP
-  resource:
-    attributes:
-      service.name: payment
+#otel:
+#  otlp:
+#    endpoint: http://localhost:4318/v1/traces  # Tempo HTTP OTLP
+#  resource:
+#    attributes:
+#      service.name: payment
   propagators: tracecontext  # Or b3 for legacy compatibility
   application:
     name: payment
   autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, io.opentelemetry.instrumentation.spring.autoconfigure.OpenTelemetryAutoConfiguration
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+#    io.opentelemetry.instrumentation.spring.autoconfigure.OpenTelemetryAutoConfiguration
   kafka:
     admin:
       fail-fast: false
@@ -129,8 +130,14 @@ my:
 management:
   tracing:
     enabled: true
-    sampling:
-      probability: 1.0
+    otlp:
+      endpoint: http://localhost:4318/v1/traces
+      transport: http
+#management:
+#  tracing:
+#    enabled: true
+#    sampling:
+#      probability: 1.0
 #  otlp:
 #    tracing:
 #      enabled: true
