@@ -3,10 +3,10 @@ server:
 
 brokers: localhost:29092
 spring:
-  otel:
-    exporter:
-      otlp:
-        endpoint: "tempo:9095"
+#  otel:
+#    exporter:
+#      otlp:
+#        endpoint: "tempo:9095"
   application:
     name: payment
   autoconfigure:
@@ -120,28 +120,28 @@ management:
     enabled: true
     sampling:
       probability: 1.0
-  otlp:
-    tracing:
-      enabled: true
-      endpoint: http://tempo:4317
-      protocol: grpc
-#      endpoint: http://localhost:55681
-#      protocol: http/protobuf
-      export:
-        enabled: true
-    metrics:
-      export:
-        enabled: false  # disable OTLP metrics export
-        step: 10s
-#  zipkin:
-#    enabled: true
-#    base-url: http://localhost:3200/api/traces
-#    sender: web
 #  otlp:
 #    tracing:
-#      endpoint: http://localhost:4317   # sends to Tempo
-#    endpoint: http://localhost:4317
-#    protocol: grpc
+#      enabled: true
+#      endpoint: http://tempo:4317
+#      protocol: grpc
+##      endpoint: http://localhost:55681
+##      protocol: http/protobuf
+#      export:
+#        enabled: true
+#    metrics:
+#      export:
+#        enabled: false  # disable OTLP metrics export
+#        step: 10s
+##  zipkin:
+##    enabled: true
+##    base-url: http://localhost:3200/api/traces
+##    sender: web
+##  otlp:
+##    tracing:
+##      endpoint: http://localhost:4317   # sends to Tempo
+##    endpoint: http://localhost:4317
+##    protocol: grpc
   endpoints:
     web:
       base-path: /actuator
