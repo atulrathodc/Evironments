@@ -3,10 +3,12 @@ server:
 
 brokers: localhost:29092
 spring:
-#  otel:
-#    exporter:
-#      otlp:
-#        endpoint: "tempo:9095"
+  otel:
+    tracing:
+      enabled: true
+      exporter:
+        otlp:
+          endpoint: http://tempo:55681/v1/traces
   application:
     name: payment
   autoconfigure:
