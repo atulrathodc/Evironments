@@ -21,7 +21,7 @@ otel:
   application:
     name: payment
   autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, io.opentelemetry.instrumentation.spring.autoconfigure.OpenTelemetryAutoConfiguration
   kafka:
     admin:
       fail-fast: false
