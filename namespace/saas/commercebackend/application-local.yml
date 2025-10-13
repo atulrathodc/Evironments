@@ -53,7 +53,7 @@ spring:
     allow-bean-definition-overriding: true
   cloud:
     vault:
-      uri: http://127.0.0.1:8200
+      uri: http://host.docker.internal:8200
       kv:
         enabled: false
         backend: secret
