@@ -9,6 +9,7 @@ spring:
       exporter:
         otlp:
           endpoint: http://tempo:55681/v1/traces
+          protocol: http/protobuf
   application:
     name: payment
   autoconfigure:
