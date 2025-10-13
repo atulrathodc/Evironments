@@ -3,6 +3,10 @@ server:
 
 brokers: localhost:29092
 spring:
+  otel:
+    exporter:
+      otlp:
+        endpoint: "tempo:9095"
   application:
     name: payment
   autoconfigure:
@@ -116,7 +120,6 @@ management:
     enabled: true
     sampling:
       probability: 1.0
-
   otlp:
     tracing:
       enabled: true
