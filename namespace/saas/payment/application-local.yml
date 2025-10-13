@@ -3,13 +3,21 @@ server:
 
 brokers: localhost:29092
 spring:
-  otel:
-    tracing:
-      enabled: true
-      exporter:
-        otlp:
-          endpoint: http://tempo:4318/v1/traces
-          protocol: http/protobuf
+#  opentelemetry:
+#    otlp:
+#      endpoint: http://localhost:4318/v1/traces  # Tempo HTTP OTLP endpoint
+#      protocol: http/protobuf                   # Use HTTP for OTLP (or grpc)
+#    resource:
+#      attributes:
+#        service.name: my-springboot-app        # Service name for traces
+  # OpenTelemetry configuration (handled by starter)
+otel:
+  otlp:
+    endpoint: http://localhost:4318/v1/traces  # Tempo HTTP OTLP
+  resource:
+    attributes:
+      service.name: payment
+  propagators: tracecontext  # Or b3 for legacy compatibility
   application:
     name: payment
   autoconfigure:
@@ -92,9 +100,9 @@ spring:
 
 logging:
   level:
-    org:
-      springframework:
-        security: INFO
+    org.springframework.security: INFO
+    io.opentelemetry: DEBUG           # Debug logs for all OpenTelemetry packages
+    io.opentelemetry.exporter: DEBUG  # More detailed logs specifically for exporters
     org.apache.kafka.clients.NetworkClient: ERROR
     org.apache.kafka.clients.producer.ProducerConfig: ERROR
     org.apache.kafka.clients.consumer.ConsumerConfig: ERROR
