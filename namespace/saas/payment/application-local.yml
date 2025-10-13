@@ -30,7 +30,7 @@ spring:
 #    username: user
 #    password: mypass
 #    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql:3306/mydatabase
+    url: jdbc:mysql://mysql3:3306/mydatabase
     username: root123
     password: mypass
     driver-class-name: com.mysql.cj.jdbc.Driver
