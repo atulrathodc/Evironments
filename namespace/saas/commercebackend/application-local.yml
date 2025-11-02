@@ -166,12 +166,10 @@ eureka:
     service-url:
 #      defaultZone: http://serviceregistry:8761/eureka/
       defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: true
-    fetch-registry: true
+    register-with-eureka: true       # Register this service with Eureka
+    fetch-registry: true             # Fetch registry info from Eureka
     healthcheck:
-      enabled: true  # integrates with Spring Boot actuator /health endpoint
-    registerWithEureka: true  # registers this app with Eureka
-    fetchRegistry: true  # downloads the registry from Eureka for discovery
+      enabled: true                  # Use /actuator/health for better status reporting
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${instanceId:${random.value}}
