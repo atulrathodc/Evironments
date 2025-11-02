@@ -168,7 +168,13 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
+    healthcheck:
+      enabled: true  # integrates with Spring Boot actuator /health endpoint
+    registerWithEureka: true  # registers this app with Eureka
+    fetchRegistry: true  # downloads the registry from Eureka for discovery
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${instanceId:${random.value}}
+    leaseRenewalIntervalInSeconds: 10  # send heartbeat every 10 seconds
+    leaseExpirationDurationInSeconds: 30  # remove if no heartbeat within 30 seconds
 
