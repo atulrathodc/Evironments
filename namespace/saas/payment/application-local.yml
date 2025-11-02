@@ -1,7 +1,7 @@
 server:
   port: 0
 
-brokers: localhost:29092
+brokers: localhost:29092,localhost:29093
 spring:
 #  opentelemetry:
 #    otlp:
