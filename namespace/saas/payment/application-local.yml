@@ -17,6 +17,9 @@ spring:
 #  resource:
 #    attributes:
 #      service.name: payment
+  listener:
+    ack-mode: record
+    missing-topics-fatal: false
   propagators: tracecontext  # Or b3 for legacy compatibility
   application:
     name: payment
