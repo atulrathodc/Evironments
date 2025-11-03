@@ -172,7 +172,34 @@ eureka:
       enabled: true                  # Use /actuator/health for better status reporting
   instance:
     prefer-ip-address: true
-    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    instance-id: ${spring.application.name}:${random.value}
     leaseRenewalIntervalInSeconds: 10  # send heartbeat every 10 seconds
     leaseExpirationDurationInSeconds: 30  # remove if no heartbeat within 30 seconds
+  -----
+  spring:
+    application:
+      name: commercebackend
+    cloud:
+      inetutils:
+        preferred-networks: 192.168
+    boot:
+      admin:
+        client:
+          url: http://localhost:8761
+
+  server:
+    port: 9003
+
+  eureka:
+    client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka/
+    instance:
+      prefer-ip-address: true
+      hostname: localhost
+      lease-renewal-interval-in-seconds: 10
+      lease-expiration-duration-in-seconds: 30
+      metadata-map:
+        management.port: ${server.port}
+      health-check-url-path: /actuator/health
 
