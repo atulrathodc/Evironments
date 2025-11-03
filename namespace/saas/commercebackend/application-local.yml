@@ -172,7 +172,7 @@ eureka:
       enabled: true                  # Use /actuator/health for better status reporting
   instance:
     prefer-ip-address: true
-    instance-id: ${spring.application.name}:${instanceId:${random.value}}
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
     leaseRenewalIntervalInSeconds: 10  # send heartbeat every 10 seconds
     leaseExpirationDurationInSeconds: 30  # remove if no heartbeat within 30 seconds
 
