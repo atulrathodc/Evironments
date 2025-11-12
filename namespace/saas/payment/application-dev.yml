@@ -56,7 +56,7 @@ spring:
     #    password: mypassword
     #    driver-class-name: com.mysql.cj.jdbc.Driver
     # mysql.prod-stack.svc.cluster.local (inside the cluster)or just mysql if connecting from another pod in same namespace
-    url: jdbc:mysql://mysql1/ecommerce_db
+    url: jdbc:mysql://mysql1/mydatabase
     username: user
     password: mypass
     driver-class-name: com.mysql.cj.jdbc.Driver
