@@ -1,18 +1,25 @@
 server:
-  port: 9002
-brokers: kafka:9092
+  port: 9003
+
+brokers: localhost:9092
+
 spring:
+  application:
+    name: commercebackend
   profiles:
     active: dev
+  security:
+    jwt:
+      secret: my-super-secret-key-my-super-secret-key
   data:
     redis:
       host: localhost
       port: 6379
       password: MyStrongPassword
   datasource:
-    url: jdbc:mysql://mysql:3306/mydatabase
+    url: jdbc:mysql://localhost:3307/mydatabase
     username: user
-    password: user-password
+    password: mypass
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -21,7 +28,7 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
   mail:
     host: smtp.gmail.com
     username: atulrathodc@gmail.com
@@ -41,24 +48,70 @@ spring:
     charset: UTF-8
     expose-spring-macro-helpers: true
   main:
+    web-application-type: reactive
     allow-circular-references: true
     allow-bean-definition-overriding: true
-  kafka:
-    bootstrap-servers: localhost:9092
   cloud:
+    inetutils:
+      preferred-networks: 192.168
+    boot:
+      admin:
+        client:
+          url: http://localhost:8761
     vault:
       uri: http://127.0.0.1:8200
-      token: hvs.TBbcfeYxzpH8yXRTvZtQJjeJ
       kv:
-        enabled: true
+        enabled: false
         backend: secret
         default-context: example
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+#    gateway:
+#      routes:
+#        - id: inventory-service
+#          uri: http://localhost:9004
+#          predicates:
+#            - Path=/inventory/**
+#          filters:
+#            - StripPrefix=1   # removes /inventory before forwarding
+#
+#        - id: product-service
+#          uri: http://localhost:9006
+#          predicates:
+#            - Path=/order/**
+#          filters:
+#            - StripPrefix=1   # removes /order before forwarding
+#
+#        - id: payment-service
+#          uri: http://localhost:9005
+#          predicates:
+#            - Path=/payment/**
+#          filters:
+#            - StripPrefix=1   # removes /payment before forwarding
+#      globalcors:
+#        corsConfigurations:
+#          '[/**]':
+#            allowedOrigins: "http://localhost:3000"
+#            allowedMethods:
+#              - GET
+#              - POST
+#              - PUT
+#              - DELETE
 
 logging:
   level:
     org:
       springframework:
         security: DEBUG
+    org.apache.kafka.clients.NetworkClient: ERROR
+    org.apache.kafka.clients.producer.ProducerConfig: ERROR
+    org.apache.kafka.clients.consumer.ConsumerConfig: ERROR
+    org.apache.kafka.clients: ERROR
+  pattern:
+    level: "%5p [traceId=%X{traceId:-}]"
 
 support:
   email: atulrathodc@gmail.com
@@ -80,16 +133,22 @@ my:
     apiKey: abc-123-secret
 
 management:
-  endpoint:
-    prometheus:
-      enabled: true
-  metrics:
-    export:
-      prometheus:
-        enabled: true
   endpoints:
     web:
-      base-path: /actuator
+      exposure:
+        include: health, info, metrics, prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+  observations:
+    key-values:
+      application: payment
+  tracing:
+    sampling:
+      probability: 1.0
 
 resilience4j:
   circuitbreaker:
@@ -105,4 +164,24 @@ resilience4j:
       myService:
         maxAttempts: 3
         waitDuration: 2s
+custom:
+  property1: value updated
 
+eureka:
+  client:
+    service-url:
+      #      defaultZone: http://serviceregistry:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true       # Register this service with Eureka
+    fetch-registry: true             # Fetch registry info from Eureka
+    healthcheck:
+      enabled: true                  # Use /actuator/health for better status reporting
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+    instance-id: ${spring.application.name}:${random.value}
+    leaseRenewalIntervalInSeconds: 10  # send heartbeat every 10 seconds
+    leaseExpirationDurationInSeconds: 30  # remove if no heartbeat within 30 seconds
+    metadata-map:
+      management.port: ${server.port}
+    health-check-url-path: /actuator/health
