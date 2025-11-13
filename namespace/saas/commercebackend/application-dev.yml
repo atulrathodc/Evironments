@@ -170,8 +170,7 @@ custom:
 eureka:
   client:
     service-url:
-      #      defaultZone: http://serviceregistry:8761/eureka/
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://serviceregistry:8761/eureka/
     register-with-eureka: true       # Register this service with Eureka
     fetch-registry: true             # Fetch registry info from Eureka
     healthcheck:

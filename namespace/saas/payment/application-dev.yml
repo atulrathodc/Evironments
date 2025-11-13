@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 9005
 
 brokers: localhost:9092
 spring:
@@ -225,8 +225,7 @@ custom:
 eureka:
   client:
     service-url:
-      #      defaultZone: http://serviceregistry:8761/eureka/
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://serviceregistry:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
   instance:
