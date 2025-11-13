@@ -30,7 +30,7 @@ spring:
     admin:
       fail-fast: false
   profiles:
-    active: dev
+    active: local
   security:
     jwt:
       secret: my-super-secret-key-my-super-secret-key
