@@ -1,7 +1,7 @@
 server:
   port: 9005
 
-brokers: localhost:9092
+brokers: kafka:9092
 spring:
   #  opentelemetry:
   #    otlp:
@@ -56,7 +56,7 @@ spring:
     #    password: mypassword
     #    driver-class-name: com.mysql.cj.jdbc.Driver
     # mysql.prod-stack.svc.cluster.local (inside the cluster)or just mysql if connecting from another pod in same namespace
-    url: jdbc:mysql://mysql1/mydatabase
+    url: jdbc:mysql://mysql1:3306/mydatabase
     username: user
     password: mypass
     driver-class-name: com.mysql.cj.jdbc.Driver
