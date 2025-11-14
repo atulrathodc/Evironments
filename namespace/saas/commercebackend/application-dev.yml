@@ -6,21 +6,26 @@ brokers: kafka:9092
 spring:
   application:
     name: commercebackend
+
   profiles:
     active: dev
+
   security:
     jwt:
       secret: my-super-secret-key-my-super-secret-key
+
   data:
     redis:
       host: redis
       port: 6379
       password: MyStrongPassword
+
   datasource:
     url: jdbc:mysql://mysql1:3306/mydatabase
     username: user
     password: mypass
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -29,6 +34,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+
   mail:
     host: smtp.gmail.com
     username: atulrathodc@gmail.com
@@ -41,65 +47,40 @@ spring:
             port: 465
             class: javax.net.ssl.SSLSocketFactory
             fallback: false
+
   freemarker:
     template-loader-path: classpath:/templates/
     suffix: .ftl
     cache: false
     charset: UTF-8
     expose-spring-macro-helpers: true
+
   main:
     web-application-type: reactive
     allow-circular-references: true
     allow-bean-definition-overriding: true
+
   cloud:
     inetutils:
       preferred-networks: 192.168
+
     boot:
       admin:
         client:
           url: http://localhost:8761
+
     vault:
       uri: http://127.0.0.1:8200
       kv:
         enabled: false
         backend: secret
         default-context: example
+
     gateway:
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
-#    gateway:
-#      routes:
-#        - id: inventory-service
-#          uri: http://localhost:9004
-#          predicates:
-#            - Path=/inventory/**
-#          filters:
-#            - StripPrefix=1   # removes /inventory before forwarding
-#
-#        - id: product-service
-#          uri: http://localhost:9006
-#          predicates:
-#            - Path=/order/**
-#          filters:
-#            - StripPrefix=1   # removes /order before forwarding
-#
-#        - id: payment-service
-#          uri: http://localhost:9005
-#          predicates:
-#            - Path=/payment/**
-#          filters:
-#            - StripPrefix=1   # removes /payment before forwarding
-#      globalcors:
-#        corsConfigurations:
-#          '[/**]':
-#            allowedOrigins: "http://localhost:3000"
-#            allowedMethods:
-#              - GET
-#              - POST
-#              - PUT
-#              - DELETE
 
 logging:
   level:
@@ -137,18 +118,22 @@ management:
     web:
       exposure:
         include: health, info, metrics, prometheus
+
   metrics:
     distribution:
       percentiles-histogram:
         http:
           server:
             requests: true
+
   observations:
     key-values:
       application: payment
+
   tracing:
     sampling:
       probability: 1.0
+
   zipkin:
     tracing:
       enabled: false
@@ -162,11 +147,13 @@ resilience4j:
         failureRateThreshold: 50
         waitDurationInOpenState: 50s
         permittedNumberOfCallsInHalfOpenState: 3
+
   retry:
     instances:
       myService:
         maxAttempts: 3
         waitDuration: 2s
+
 custom:
   property1: value updated
 
@@ -174,16 +161,17 @@ eureka:
   client:
     service-url:
       defaultZone: http://serviceregistry:8761/eureka/
-    register-with-eureka: true       # Register this service with Eureka
-    fetch-registry: true             # Fetch registry info from Eureka
+    register-with-eureka: true
+    fetch-registry: true
     healthcheck:
-      enabled: true                  # Use /actuator/health for better status reporting
+      enabled: true
+
   instance:
     prefer-ip-address: false
     hostname: commercebackend
     instance-id: ${spring.application.name}:${random.value}
-    leaseRenewalIntervalInSeconds: 10  # send heartbeat every 10 seconds
-    leaseExpirationDurationInSeconds: 30  # remove if no heartbeat within 30 seconds
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
     metadata-map:
       management.port: ${server.port}
     health-check-url-path: /actuator/health
