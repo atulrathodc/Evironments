@@ -233,5 +233,6 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
+    hostname: payment
     instance-id: ${spring.application.name}:${random.value}
 
