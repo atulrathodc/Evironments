@@ -77,6 +77,8 @@ spring:
         default-context: example
 
     gateway:
+      forwarded:
+        enabled: true
       discovery:
         locator:
           enabled: true
