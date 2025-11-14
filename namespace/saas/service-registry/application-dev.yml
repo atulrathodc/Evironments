@@ -21,7 +21,8 @@ eureka:
     waitTimeInMsWhenSyncEmpty: 0  # Faster startup
     enableSelfPreservation: false # Disable for development; enable in production
   instance:
-    prefer-ip-address: true
+    prefer-ip-address: false
+    hostname: serviceregistry
 logging:
   level:
     com.netflix.eureka: OFF
