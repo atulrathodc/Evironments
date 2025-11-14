@@ -70,7 +70,7 @@ spring:
           url: http://localhost:8761
 
     vault:
-      uri: http://127.0.0.1:8200
+      uri: http://vault:8200
       kv:
         enabled: false
         backend: secret

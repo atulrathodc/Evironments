@@ -4,7 +4,7 @@ spring:
   cloud:
     vault:
       #      uri: http://host.docker.internal:8200
-      uri: http://127.0.0.1:8200
+      uri: http://vault:8200
       kv:
         enabled: false
         backend: secret
