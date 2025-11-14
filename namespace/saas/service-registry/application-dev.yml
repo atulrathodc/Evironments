@@ -17,6 +17,8 @@ eureka:
   client:
     register-with-eureka: false   # Server doesn’t register itself
     fetch-registry: false         # Server doesn’t fetch other registries
+    service-url:
+      defaultZone: http://service-registry:8761/eureka/
   server:
     waitTimeInMsWhenSyncEmpty: 0  # Faster startup
     enableSelfPreservation: false # Disable for development; enable in production
