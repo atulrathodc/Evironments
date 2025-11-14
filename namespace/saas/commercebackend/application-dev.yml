@@ -13,7 +13,7 @@ spring:
       secret: my-super-secret-key-my-super-secret-key
   data:
     redis:
-      host: localhost
+      host: redis
       port: 6379
       password: MyStrongPassword
   datasource:

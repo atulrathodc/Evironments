@@ -41,7 +41,7 @@ spring:
           jws-algorithm: HS256# ✅ same secret in all services
   data:
     redis:
-      host: localhost
+      host: redis
       port: 6379
       password: MyStrongPassword
   #  datasource:
