@@ -22,7 +22,7 @@ eureka:
     enableSelfPreservation: false # Disable for development; enable in production
   instance:
     prefer-ip-address: false
-    hostname: service-registry
+    hostname: serviceregistry
 logging:
   level:
     com.netflix.eureka: OFF
