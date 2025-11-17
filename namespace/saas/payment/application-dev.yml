@@ -166,16 +166,24 @@ management:
   observations:
     key-values:
       application: payment
+#  tracing:
+#    sampling:
+#      probability: 0.0
+#
+#  zipkin:
+#    tracing:
+#      propagation:
+#        type: none
+#      enabled: false
+#      endpoint: ""
   tracing:
+    enabled: true
     sampling:
-      probability: 0.0
+      probability: 1.0
 
   zipkin:
     tracing:
-      propagation:
-        type: none
-      enabled: false
-      endpoint: ""
+      endpoint: http://tempo:9411/api/v2/spans
 #management:
 #  tracing:
 #    enabled: true
