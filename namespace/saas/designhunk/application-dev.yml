@@ -4,15 +4,18 @@ brokers: kafka:9092
 spring:
   profiles:
     active: dev
+  security:
+    jwt:
+      secret: my-super-secret-key-my-super-secret-key
   data:
     redis:
       host: localhost
       port: 6379
       password: MyStrongPassword
   datasource:
-    url: jdbc:mysql://mysql:3306/mydatabase
-    username: user
-    password: user-password
+    url: jdbc:mysql://mysql:3306/ecommerce_db
+    username: root
+    password: 12345
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
