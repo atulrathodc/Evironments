@@ -15,7 +15,7 @@ spring:
       port: 6379
       password: MyStrongPassword
   datasource:
-    url: jdbc:mysql://designhunk.com:3306/mydatabase
+    url: jdbc:mysql://localhost:3306/mydatabase
     username: user
     password: mypass
     driver-class-name: com.mysql.cj.jdbc.Driver
