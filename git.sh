@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMMIT_MESSAGE="updated property files"
+COMMIT_MESSAGE="updated design hunk db property files"
 
 # Add all changes
 git add .
