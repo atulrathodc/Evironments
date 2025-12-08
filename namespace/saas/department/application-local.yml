@@ -3,7 +3,7 @@ custom:
 server:
   port: 9001
 
-brokers: localhost:9092
+brokers: 157.20.214.83:9092
 
 spring:
   profiles:

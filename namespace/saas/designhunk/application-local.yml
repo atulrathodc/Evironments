@@ -82,16 +82,35 @@ my:
     apiKey: abc-123-secret
 
 management:
-  endpoint:
-    prometheus:
-      enabled: true
-  metrics:
-    export:
-      prometheus:
-        enabled: true
   endpoints:
     web:
-      base-path: /actuator
+      exposure:
+        include: health, info, metrics, prometheus
+
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+
+  observations:
+    key-values:
+      application: designhunk
+
+  tracing:
+    sampling:
+      probability: 1.0
+
+  zipkin:
+    tracing:
+      enabled: false
 
 resilience4j:
   circuitbreaker:
