@@ -70,11 +70,6 @@ stripe:
   secret:
     key: sk_test_XXXXXXXXXXXXXXXXXXXX
 
-openai:
-  model: gpt-4o-mini
-  api:
-    key: sk-svcacct-IV3H3npvGdyco2RPOQD2jLZx4vtPSDenb-nSoHeBCCrzSyHA1pS3Loi-gKowfOT3BlbkFJHIW8ui5Y43Xz_iU3gO7vI5XnSH4PMrlO-8uX9DIUDtUC2LpRTO532KeVyitQMA
-    url: https://api.openai.com/v1/chat/completions
 
 my:
   framework:
