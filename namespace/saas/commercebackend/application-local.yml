@@ -17,7 +17,7 @@ spring:
       port: 6379
       password: MyStrongPassword
   datasource:
-    url: jdbc:mysql://localhost:3309/mydatabase
+    url: jdbc:mysql://157.20.214.83:30000/ecommerce_db
     username: user
     password: mypass
     driver-class-name: com.mysql.cj.jdbc.Driver
