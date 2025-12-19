@@ -46,8 +46,8 @@ spring:
       password: MyStrongPassword
   datasource:
     url: jdbc:mysql://157.20.214.83:30000/ecommerce_db
-    username: user
-    password: mypass
+    username: root
+    password: 12345
     driver-class-name: com.mysql.cj.jdbc.Driver
 #  datasource:
 #    url: jdbc:mysql://mysql.prod-stack.svc.cluster.local:3306/mydb
