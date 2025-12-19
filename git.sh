@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMMIT_MESSAGE="updated  secret   #1"
+COMMIT_MESSAGE="updated  eureka to dev   #1"
 
 # Add all changes
 git add .
