@@ -123,17 +123,22 @@ resilience4j:
         waitDuration: 2s
 custom:
   property1: value updated
+
 eureka:
   client:
     service-url:
-      defaultZone: https://service-registry.dev.designhunk.com/eureka/
-#      defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: true       # Register this service with Eureka
-    fetch-registry: true             # Fetch registry info from Eureka
+      defaultZone: https://service-registry.designhunk.com/eureka/
+    register-with-eureka: true
+    fetch-registry: true
     healthcheck:
-      enabled: true                  # Use /actuator/health for better status reporting
+      enabled: true
+
   instance:
-    prefer-ip-address: true
-    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
-    leaseRenewalIntervalInSeconds: 10  # send heartbeat every 10 seconds
-    leaseExpirationDurationInSeconds: 30  # remove if no heartbeat within 30 seconds
+    prefer-ip-address: false
+    hostname: designhunk
+    instance-id: ${spring.application.name}:${random.value}
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+    metadata-map:
+      management.port: ${server.port}
+    health-check-url-path: /actuator/health

@@ -102,4 +102,22 @@ resilience4j:
       myService:
         maxAttempts: 3
         waitDuration: 2s
+eureka:
+  client:
+    service-url:
+      defaultZone: https://service-registry.designhunk.com/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+    healthcheck:
+      enabled: true
+
+  instance:
+    prefer-ip-address: false
+    hostname: designhunk
+    instance-id: ${spring.application.name}:${random.value}
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+    metadata-map:
+      management.port: ${server.port}
+    health-check-url-path: /actuator/health
 
