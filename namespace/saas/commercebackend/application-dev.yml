@@ -165,17 +165,16 @@ eureka:
   client:
     service-url:
       defaultZone: https://service-registry.dev.designhunk.com/eureka/
-    register-with-eureka: true
-    fetch-registry: true
+    register-with-eureka: true       # Register this service with Eureka
+    fetch-registry: true             # Fetch registry info from Eureka
     healthcheck:
-      enabled: true
-
+      enabled: true                  # Use /actuator/health for better status reporting
   instance:
-    prefer-ip-address: false
-    hostname: commercebackend
+    prefer-ip-address: true
+    hostname: localhost
     instance-id: ${spring.application.name}:${random.value}
-    leaseRenewalIntervalInSeconds: 10
-    leaseExpirationDurationInSeconds: 30
+    leaseRenewalIntervalInSeconds: 10  # send heartbeat every 10 seconds
+    leaseExpirationDurationInSeconds: 30  # remove if no heartbeat within 30 seconds
     metadata-map:
       management.port: ${server.port}
     health-check-url-path: /actuator/health
