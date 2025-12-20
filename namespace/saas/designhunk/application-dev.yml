@@ -2,6 +2,8 @@ server:
   port: 9002
 brokers: 157.20.214.83:9092
 spring:
+  application:
+    name: designhunk
   profiles:
     active: dev
   security:

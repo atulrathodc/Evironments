@@ -4,6 +4,8 @@ server:
 brokers: localhost:9092
 
 spring:
+  application:
+    name: designhunk
   profiles:
     active: dev
   security:
