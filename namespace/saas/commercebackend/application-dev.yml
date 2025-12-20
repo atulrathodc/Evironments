@@ -1,6 +1,3 @@
-server:
-  port: 9003
-
 brokers: 157.20.214.83:9092
 
 spring:

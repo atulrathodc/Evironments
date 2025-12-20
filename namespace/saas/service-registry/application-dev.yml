@@ -11,8 +11,6 @@ spring:
         default-context: example
   profiles:
     active: dev
-server:
-  port: 8761
 eureka:
   client:
     register-with-eureka: false   # Server doesn’t register itself
