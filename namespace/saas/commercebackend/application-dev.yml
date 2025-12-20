@@ -1,8 +1,6 @@
 server:
   port: 9003
 
-#brokers: my-kafka-release.default.svc.cluster.local:9092
-#brokers: my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
 brokers: 157.20.214.83:9092
 
 spring:
