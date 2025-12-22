@@ -2,6 +2,9 @@ brokers: 157.20.214.83:9092
 spring:
   application:
     name: designhunk
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  #    io.opentelemetry.instrumentation.spring.autoconfigure.OpenTelemetryAutoConfiguration
   profiles:
     active: dev
   security:
@@ -103,8 +106,8 @@ resilience4j:
 eureka:
   client:
     service-url:
-      #      defaultZone: https://service-registry.dev.designhunk.com/eureka/
-      defaultZone: http://localhost:8761/eureka/
+            defaultZone: https://service-registry.dev.designhunk.com/eureka/
+#      defaultZone: http://localhost:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
   instance:
