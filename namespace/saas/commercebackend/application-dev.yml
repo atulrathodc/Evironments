@@ -72,7 +72,6 @@ spring:
         backend: secret
         default-context: example
 
-
     gateway:
       forwarded:
         enabled: true
@@ -102,16 +101,16 @@ spring:
 #            - Path=/payment/**
 #          filters:
 #            - StripPrefix=1   # removes /payment before forwarding
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "http://localhost:3000","http://localhost:3001"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-            allowedHeaders: "*"
+#      globalcors:
+#        corsConfigurations:
+#          '[/**]':
+#            allowedOrigins: "http://localhost:3000","http://localhost:3001"
+#            allowedMethods:
+#              - GET
+#              - POST
+#              - PUT
+#              - DELETE
+#            allowedHeaders: "*"
 
 logging:
   level:
