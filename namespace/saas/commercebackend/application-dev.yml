@@ -208,3 +208,5 @@ eureka:
     metadata-map:
       management.port: ${server.port}
     health-check-url-path: /actuator/health
+  ssl:
+    enabled: false

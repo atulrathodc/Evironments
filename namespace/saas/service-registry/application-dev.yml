@@ -20,7 +20,10 @@ eureka:
     enableSelfPreservation: false # Disable for development; enable in production
   instance:
     prefer-ip-address: true
+  ssl:
+    enabled: false
 logging:
   level:
     com.netflix.eureka: OFF
     com.netflix.discovery: OFF
+
