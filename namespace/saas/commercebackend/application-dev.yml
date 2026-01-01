@@ -158,7 +158,7 @@ management:
 
   observations:
     key-values:
-      application: payment
+      application: commercebackend
 
   tracing:
     sampling:
