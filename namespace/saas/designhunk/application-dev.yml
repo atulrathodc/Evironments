@@ -79,15 +79,19 @@ my:
 
 management:
   endpoint:
-    prometheus:
-      enabled: true
+    health:
+#      show-details: always
+      probes:
+        enabled: true
   metrics:
     export:
       prometheus:
         enabled: true
   endpoints:
     web:
-      base-path: /actuator
+      exposure:
+        include: health, info, metrics, prometheus
+
 
 resilience4j:
   circuitbreaker:
