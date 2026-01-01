@@ -52,7 +52,7 @@ spring:
   cloud:
     vault:
       uri: vault.dev.designhunk.com
-      token: hvs.TBbcfeYxzpH8yXRTvZtQJjeJ
+      token: root
       kv:
         enabled: true
         backend: secret
