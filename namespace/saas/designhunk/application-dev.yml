@@ -57,11 +57,11 @@ spring:
         enabled: true
         backend: secret
         default-context: example
-server:
-  tomcat:
-    threads:
-      max: 120
-      connection-timeout: 20s
+#server:
+#  tomcat:
+#    threads:
+#      max: 120
+#      connection-timeout: 20s
 logging:
   level:
     org:
