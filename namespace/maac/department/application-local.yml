@@ -1,0 +1,131 @@
+custom:
+  property1: value updated
+server:
+  port: 9001
+
+brokers: 157.20.214.83:9092
+
+spring:
+  profiles:
+    active: dev
+  security:
+    jwt:
+      secret: my-super-secret-key-my-super-secret-key
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: MyStrongPassword
+
+  boot:
+    admin:
+      client:
+        url: http://localhost:8081
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/mydatabase
+    username: user
+    password: user-password
+#    password: "${vault:my-db#password}"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  mail:
+    host: smtp.gmail.com
+    username: atulrathodc@gmail.com
+    password: "fvpm xuzo kdyu wldi"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+    cache: false
+    charset: UTF-8
+    expose-spring-macro-helpers: true
+
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+    banner-mode: off
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+  cloud:
+    vault:
+      uri: http://127.0.0.1:8200
+      kv:
+        enabled: true
+        backend: secret
+        default-context: example
+
+support:
+  email: atulrathodc@gmail.com
+  name: Atul Rathod
+
+my:
+  framework:
+    enabled: true
+    apiKey: abc-123-secret
+  db:
+    username: "${vault:my-db#username3}"
+    password: "${vault:my-db#password}"
+
+
+management:
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: refresh, health, info, prometheus
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      myService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 50s
+        permittedNumberOfCallsInHalfOpenState: 3
+  retry:
+    instances:
+      myService:
+        maxAttempts: 3
+        waitDuration: 2s
+eureka:
+  client:
+    service-url:
+      #      defaultZone: http://serviceregistry:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true       # Register this service with Eureka
+    fetch-registry: true             # Fetch registry info from Eureka
+    healthcheck:
+      enabled: true                  # Use /actuator/health for better status reporting
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    leaseRenewalIntervalInSeconds: 10  # send heartbeat every 10 seconds
+    leaseExpirationDurationInSeconds: 30  # remove if no heartbeat within 30 seconds

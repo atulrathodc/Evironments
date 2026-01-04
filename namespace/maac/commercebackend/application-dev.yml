@@ -1,0 +1,219 @@
+brokers: 157.20.214.83:9092
+
+spring:
+  application:
+    name: commercebackend
+
+  profiles:
+    active: dev
+
+  security:
+    jwt:
+      secret: my-super-secret-key-my-super-secret-key
+
+  data:
+    redis:
+      host: redis
+      port: 6379
+      password: MyStrongPassword
+
+  datasource:
+    url: jdbc:mysql://157.20.214.83:30000/ecommerce_db
+    username: root
+    password: 12345
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  mail:
+    host: smtp.gmail.com
+    username: atulrathodc@gmail.com
+    password: "fvpm xuzo kdyu wldi"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+    cache: false
+    charset: UTF-8
+    expose-spring-macro-helpers: true
+
+  main:
+    web-application-type: reactive
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+
+  cloud:
+    inetutils:
+      preferred-networks: 192.168
+
+    boot:
+      admin:
+        client:
+          url: http://localhost:8761
+
+    vault:
+      uri: http://vault:8200
+      kv:
+        enabled: false
+        backend: secret
+        default-context: example
+
+    gateway:
+      forwarded:
+        enabled: true
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+#    gateway:
+#      routes:
+#        - id: inventory-service
+#          uri: http://localhost:9004
+#          predicates:
+#            - Path=/inventory/**
+#          filters:
+#            - StripPrefix=1   # removes /inventory before forwarding
+#
+#        - id: product-service
+#          uri: http://localhost:9006
+#          predicates:
+#            - Path=/order/**
+#          filters:
+#            - StripPrefix=1   # removes /order before forwarding
+#
+#        - id: payment-service
+#          uri: http://localhost:9005
+#          predicates:
+#            - Path=/payment/**
+#          filters:
+#            - StripPrefix=1   # removes /payment before forwarding
+#      globalcors:
+#        corsConfigurations:
+#          '[/**]':
+#            allowedOrigins: "http://localhost:3000","http://localhost:3001"
+#            allowedMethods:
+#              - GET
+#              - POST
+#              - PUT
+#              - DELETE
+#            allowedHeaders: "*"
+#server:
+#  tomcat:
+#    threads:
+#      max: 120
+#      connection-timeout: 20s
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+    org.apache.kafka.clients.NetworkClient: ERROR
+    org.apache.kafka.clients.producer.ProducerConfig: ERROR
+    org.apache.kafka.clients.consumer.ConsumerConfig: ERROR
+    org.apache.kafka.clients: ERROR
+  pattern:
+    level: "%5p [traceId=%X{traceId:-}]"
+
+support:
+  email: atulrathodc@gmail.com
+  name: Atul Rathod
+
+stripe:
+  secret:
+    key: sk_test_XXXXXXXXXXXXXXXXXXXX
+
+openai:
+  model: gpt-4o-mini
+  api:
+    key: sk-svcacct-IV3H3npvGdyco2RPOQD2jLZx4vtPSDenb-nSoHeBCCrzSyHA1pS3Loi-gKowfOT3BlbkFJHIW8ui5Y43Xz_iU3gO7vI5XnSH4PMrlO-8uX9DIUDtUC2LpRTO532KeVyitQMA
+    url: https://api.openai.com/v1/chat/completions
+
+my:
+  framework:
+    enabled: true
+    apiKey: abc-123-secret
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+
+  observations:
+    key-values:
+      application: commercebackend
+
+  tracing:
+    sampling:
+      probability: 0.0
+
+  zipkin:
+    tracing:
+      propagation:
+        type: none
+      enabled: false
+      endpoint: ""
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      myService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 50s
+        permittedNumberOfCallsInHalfOpenState: 3
+
+  retry:
+    instances:
+      myService:
+        maxAttempts: 3
+        waitDuration: 2s
+
+custom:
+  property1: value updated
+
+eureka:
+  client:
+    service-url:
+      defaultZone: https://service-registry.dev.designhunk.com/eureka/
+#      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true       # Register this service with Eureka
+    fetch-registry: true             # Fetch registry info from Eureka
+    healthcheck:
+      enabled: true                  # Use /actuator/health for better status reporting
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+    instance-id: ${spring.application.name}:${random.value}
+    leaseRenewalIntervalInSeconds: 10  # send heartbeat every 10 seconds
+    leaseExpirationDurationInSeconds: 30  # remove if no heartbeat within 30 seconds
+    metadata-map:
+      management.port: ${server.port}
+    health-check-url-path: /actuator/health
