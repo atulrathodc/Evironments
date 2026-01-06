@@ -1,18 +1,24 @@
-server:
-  port: 9002
-brokers: kafka:9092
+brokers: 157.20.214.83:9092
 spring:
+  application:
+    name: product
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  #    io.opentelemetry.instrumentation.spring.autoconfigure.OpenTelemetryAutoConfiguration
   profiles:
     active: dev
+  security:
+    jwt:
+      secret: my-super-secret-key-my-super-secret-key
   data:
     redis:
       host: localhost
       port: 6379
       password: MyStrongPassword
   datasource:
-    url: jdbc:mysql://mysql:3306/mydatabase
-    username: user
-    password: user-password
+    url: jdbc:mysql://157.20.214.83:30000/ecommerce_db
+    username: root
+    password: 12345
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -43,17 +49,19 @@ spring:
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
-  kafka:
-    bootstrap-servers: localhost:9092
   cloud:
     vault:
-      uri: http://127.0.0.1:8200
-      token: hvs.TBbcfeYxzpH8yXRTvZtQJjeJ
+      uri: https://vault.dev.designhunk.com/
+      token: root
       kv:
         enabled: true
         backend: secret
         default-context: example
-
+#server:
+#  tomcat:
+#    threads:
+#      max: 120
+#      connection-timeout: 20s
 logging:
   level:
     org:
@@ -67,12 +75,6 @@ support:
 stripe:
   secret:
     key: sk_test_XXXXXXXXXXXXXXXXXXXX
-
-openai:
-  model: gpt-4o-mini
-  api:
-    key: sk-svcacct-IV3H3npvGdyco2RPOQD2jLZx4vtPSDenb-nSoHeBCCrzSyHA1pS3Loi-gKowfOT3BlbkFJHIW8ui5Y43Xz_iU3gO7vI5XnSH4PMrlO-8uX9DIUDtUC2LpRTO532KeVyitQMA
-    url: https://api.openai.com/v1/chat/completions
 
 my:
   framework:
@@ -112,6 +114,7 @@ management:
       enabled: false
       endpoint: ""
 
+
 resilience4j:
   circuitbreaker:
     instances:
@@ -126,4 +129,16 @@ resilience4j:
       myService:
         maxAttempts: 3
         waitDuration: 2s
+eureka:
+  client:
+    service-url:
+      defaultZone: https://service-registry.dev.designhunk.com/eureka/
+    #      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}
+  ssl:
+    enabled: false
 
