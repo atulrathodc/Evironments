@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMMIT_MESSAGE="updated  eureka to dev   #1"
+COMMIT_MESSAGE="updated local dev config"
 
 # Add all changes
 git add .
