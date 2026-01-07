@@ -51,7 +51,7 @@ spring:
     allow-bean-definition-overriding: true
   cloud:
     vault:
-      uri: https://vault.dev.designhunk.com/
+      uri: http://vault.local.designhunk.com/
       token: root
       kv:
         enabled: true
