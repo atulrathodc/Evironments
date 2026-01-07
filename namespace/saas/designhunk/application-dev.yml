@@ -19,7 +19,8 @@ spring:
     url: jdbc:mysql://157.20.214.83:3306/appdb
     username: appuser
     password: App@12345
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.mariadb.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update

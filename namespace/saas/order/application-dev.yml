@@ -132,7 +132,7 @@ resilience4j:
 eureka:
   client:
     service-url:
-      defaultZone: https://service-registry.dev.designhunk.com/eureka/
+      defaultZone: http://service-registry.local.designhunk.com/eureka/
     #      defaultZone: http://localhost:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
