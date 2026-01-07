@@ -10,10 +10,10 @@ spring:
       port: 6379
       password: MyStrongPassword
   datasource:
-    url: jdbc:mysql://mysql:3306/mydatabase
-    username: user
-    password: user-password
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mariadb://157.20.214.83:3306/appdb
+    username: appuser
+    password: App@12345
+    driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
