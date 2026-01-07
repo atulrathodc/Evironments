@@ -18,9 +18,10 @@ spring:
       password: MyStrongPassword
 
   datasource:
-    url: jdbc:mysql://157.20.214.83:30000/ecommerce_db
-    username: root
-    password: 12345
+    url: jdbc:mariadb://157.20.214.83:3306/appdb
+    username: appuser
+    password: App@12345
+    driver-class-name: org.mariadb.jdbc.Driver
 
   jpa:
     hibernate:
