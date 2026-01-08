@@ -151,6 +151,7 @@ my:
 management:
   endpoints:
     web:
+      base-path: /api/events/commercebackend/actuator
       exposure:
         include: health, info, metrics, prometheus
   endpoint:
@@ -217,3 +218,5 @@ eureka:
     metadata-map:
       management.port: ${server.port}
     health-check-url-path: /actuator/health
+  ssl:
+    enabled: false
