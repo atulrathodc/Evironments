@@ -88,7 +88,7 @@ management:
         enabled: true
   endpoints:
     web:
-      base-path: /api/events/designhunk/actuator
+      base-path: /actuator
       exposure:
         include: refresh, health, info, prometheus
 

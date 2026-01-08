@@ -85,6 +85,7 @@ my:
 management:
   endpoints:
     web:
+      base-path: /api/events/designhunk/actuator
       exposure:
         include: health, info, metrics, prometheus
   endpoint:
