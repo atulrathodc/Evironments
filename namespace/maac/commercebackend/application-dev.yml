@@ -1,4 +1,4 @@
-brokers: 157.20.214.83:9092
+brokers: host.docker.internal:9092
 
 spring:
   application:

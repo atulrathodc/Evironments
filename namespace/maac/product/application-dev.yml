@@ -1,6 +1,6 @@
 server:
   port: 9002
-brokers: kafka:9092
+brokers: host.docker.internal:9092
 spring:
   profiles:
     active: dev
