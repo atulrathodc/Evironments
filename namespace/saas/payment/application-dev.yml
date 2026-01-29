@@ -48,16 +48,10 @@ spring:
   #    password: mypass
   #    driver-class-name: com.mysql.cj.jdbc.Driver
   datasource:
-    #    url: jdbc:mysql://mysql.prod-stack.svc.cluster.local:3306/mydb
-    #    url: jdbc:mysql://localhost:3315/mydatabase
-    #    username: root
-    #    password: mypassword
-    #    driver-class-name: com.mysql.cj.jdbc.Driver
-    # mysql.prod-stack.svc.cluster.local (inside the cluster)or just mysql if connecting from another pod in same namespace
-    url: jdbc:mariadb://157.20.214.83:3306/appdb
-    username: appuser
-    password: App@12345
-    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/admindb
+    username: root
+    password: Atul@1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
   #    url: jdbc:mysql://mysql3:3306/mydatabase
   #    username: root123
   #    password: mypass
