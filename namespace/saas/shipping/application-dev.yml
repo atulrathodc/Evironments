@@ -197,7 +197,7 @@ custom:
 eureka:
   client:
     service-url:
-      defaultZone: http://service-registry.local.designhunk.com/eureka/
+      defaultZone: http://service-registry.designhunk.com/eureka/
 #      defaultZone: http://localhost:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
