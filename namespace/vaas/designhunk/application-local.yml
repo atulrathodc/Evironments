@@ -1,0 +1,146 @@
+server:
+  port: 9002
+
+brokers: localhost:9092
+
+spring:
+  application:
+    name: designhunk
+  profiles:
+    active: dev
+  security:
+    jwt:
+      secret: my-super-secret-key-my-super-secret-key
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: MyStrongPassword
+  datasource:
+    url: jdbc:mysql://157.20.214.83:30000/ecommerce_db
+    username: root
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  mail:
+    host: smtp.gmail.com
+    username: atulrathodc@gmail.com
+    password: "fvpm xuzo kdyu wldi"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+    cache: false
+    charset: UTF-8
+    expose-spring-macro-helpers: true
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  cloud:
+    vault:
+      uri: http://127.0.0.1:8200
+      kv:
+        enabled: false
+        backend: secret
+        default-context: example
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+support:
+  email: atulrathodc@gmail.com
+  name: Atul Rathod
+
+stripe:
+  secret:
+    key: sk_test_XXXXXXXXXXXXXXXXXXXX
+
+
+my:
+  framework:
+    enabled: true
+    apiKey: abc-123-secret
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+
+  observations:
+    key-values:
+      application: designhunk
+
+  tracing:
+    sampling:
+      probability: 1.0
+
+  zipkin:
+    tracing:
+      enabled: false
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      myService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 50s
+        permittedNumberOfCallsInHalfOpenState: 3
+  retry:
+    instances:
+      myService:
+        maxAttempts: 3
+        waitDuration: 2s
+custom:
+  property1: value updated
+
+eureka:
+  client:
+    service-url:
+      defaultZone: https://service-registry.designhunk.com/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+    healthcheck:
+      enabled: true
+
+  instance:
+    prefer-ip-address: false
+    hostname: designhunk
+    instance-id: ${spring.application.name}:${random.value}
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+    metadata-map:
+      management.port: ${server.port}
+    health-check-url-path: /actuator/health

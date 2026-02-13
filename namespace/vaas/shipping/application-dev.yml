@@ -1,0 +1,209 @@
+brokers: 127.0.0.1:9092
+
+spring:
+  #  opentelemetry:
+  #    otlp:
+  #      endpoint: http://localhost:4318/v1/traces  # Tempo HTTP OTLP endpoint
+  #      protocol: http/protobuf                   # Use HTTP for OTLP (or grpc)
+  #    resource:
+  #      attributes:
+  #        service.name: my-springboot-app        # Service name for traces
+  # OpenTelemetry configuration (handled by starter)
+  #otel:
+  #  otlp:
+  #    endpoint: http://localhost:4318/v1/traces  # Tempo HTTP OTLP
+  #  resource:
+  #    attributes:
+  #      service.name: payment
+  listener:
+    ack-mode: record
+    missing-topics-fatal: false
+  propagators: tracecontext  # Or b3 for legacy compatibility
+  application:
+    name: shipping
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  #    io.opentelemetry.instrumentation.spring.autoconfigure.OpenTelemetryAutoConfiguration
+  kafka:
+    admin:
+      fail-fast: false
+  profiles:
+    active: dev
+  security:
+    jwt:
+      secret: my-super-secret-key-my-super-secret-key
+    oauth2:
+      resourceserver:
+        jwt:
+          secret: my-super-secret-key-my-super-secret-key
+          jws-algorithm: HS256# ✅ same secret in all services
+  data:
+    redis:
+      host: redis
+      port: 6379
+      password: MyStrongPassword
+  #  datasource:
+  #    url: jdbc:mysql://localhost:3309/mydatabase
+  #    username: user
+  #    password: mypass
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    url: jdbc:mysql://localhost:3306/admindb
+    username: root
+    password: Atul@1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #    url: jdbc:mysql://mysql3:3306/mydatabase
+  #    username: root123
+  #    password: mypass
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  #  datasource:
+  #    url: jdbc:mysql://mysql3:3306/mydatabase?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+  #    username: root
+  #    password: root123
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  #  datasource:
+  ##    url: jdbc:mysql://localhost:3306/mydatabase?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+  #    url: jdbc:mysql://localhost:3309/mydatabase
+  #    username: root
+  #    password: root123
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  #  jpa:
+  #    hibernate:
+  #      ddl-auto: update
+  #      naming:
+  #        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  #    properties:
+  #      hibernate:
+  #        dialect: org.hibernate.dialect.MySQLDialect
+  mail:
+    host: smtp.gmail.com
+    username: atulrathodc@gmail.com
+    password: "fvpm xuzo kdyu wldi"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+    cache: false
+    charset: UTF-8
+    expose-spring-macro-helpers: true
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  cloud:
+    vault:
+      #      uri: http://host.docker.internal:8200
+      uri: http://vault:8200
+      kv:
+        enabled: false
+        backend: secret
+        default-context: example
+
+logging:
+  level:
+    root: INFO
+    org.springframework.kafka: INFO
+    org.springframework.security: INFO
+    io.opentelemetry: DEBUG
+    io.opentelemetry.exporter: DEBUG
+    org.apache.kafka.clients: ERROR
+#    org.apache.kafka.clients.NetworkClient: ERROR
+#    org.apache.kafka.clients.producer.ProducerConfig: ERROR
+#    org.apache.kafka.clients.consumer.ConsumerConfig: ERROR
+
+support:
+  email: atulrathodc@gmail.com
+  name: Atul Rathod
+
+stripe:
+  secret:
+    key: sk_test_XXXXXXXXXXXXXXXXXXXX
+
+openai:
+  model: gpt-4o-mini
+  api:
+    key: sk-svcacct-IV3H3npvGdyco2RPOQD2jLZx4vtPSDenb-nSoHeBCCrzSyHA1pS3Loi-gKowfOT3BlbkFJHIW8ui5Y43Xz_iU3gO7vI5XnSH4PMrlO-8uX9DIUDtUC2LpRTO532KeVyitQMA
+    url: https://api.openai.com/v1/chat/completions
+
+my:
+  framework:
+    enabled: true
+    apiKey: abc-123-secret
+
+management:
+  endpoints:
+    web:
+      base-path: /api/events/shipping/actuator
+      exposure:
+        include: health, info, metrics, prometheus
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+
+  observations:
+    key-values:
+      application: designhunk
+
+  tracing:
+    sampling:
+      probability: 0.0
+
+  zipkin:
+    tracing:
+      propagation:
+        type: none
+      enabled: false
+      endpoint: ""
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      myService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 50s
+        permittedNumberOfCallsInHalfOpenState: 3
+  retry:
+    instances:
+      myService:
+        maxAttempts: 3
+        waitDuration: 2s
+custom:
+  property1: value updated
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry.designhunk.com/eureka/
+#      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}
+  ssl:
+    enabled: false
+

@@ -1,0 +1,122 @@
+server:
+  port: 9007
+
+brokers: localhost:9092
+
+spring:
+  profiles:
+    active: dev
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: MyStrongPassword
+  datasource:
+    url: jdbc:mysql://localhost:3310/mydatabase
+    username: user
+    password: mypass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  mail:
+    host: smtp.gmail.com
+    username: atulrathodc@gmail.com
+    password: "fvpm xuzo kdyu wldi"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+    cache: false
+    charset: UTF-8
+    expose-spring-macro-helpers: true
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  cloud:
+    vault:
+      uri: http://127.0.0.1:8200
+      kv:
+        enabled: false
+        backend: secret
+        default-context: example
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+support:
+  email: atulrathodc@gmail.com
+  name: Atul Rathod
+
+stripe:
+  secret:
+    key: sk_test_XXXXXXXXXXXXXXXXXXXX
+
+openai:
+  model: gpt-4o-mini
+  api:
+    key: sk-svcacct-IV3H3npvGdyco2RPOQD2jLZx4vtPSDenb-nSoHeBCCrzSyHA1pS3Loi-gKowfOT3BlbkFJHIW8ui5Y43Xz_iU3gO7vI5XnSH4PMrlO-8uX9DIUDtUC2LpRTO532KeVyitQMA
+    url: https://api.openai.com/v1/chat/completions
+
+my:
+  framework:
+    enabled: true
+    apiKey: abc-123-secret
+
+management:
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoints:
+    web:
+      base-path: /actuator
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      myService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 50s
+        permittedNumberOfCallsInHalfOpenState: 3
+  retry:
+    instances:
+      myService:
+        maxAttempts: 3
+        waitDuration: 2s
+custom:
+  property1: value updated
+eureka:
+  client:
+    service-url:
+      #      defaultZone: http://serviceregistry:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true       # Register this service with Eureka
+    fetch-registry: true             # Fetch registry info from Eureka
+    healthcheck:
+      enabled: true                  # Use /actuator/health for better status reporting
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    leaseRenewalIntervalInSeconds: 10  # send heartbeat every 10 seconds
+    leaseExpirationDurationInSeconds: 30  # remove if no heartbeat within 30 seconds
