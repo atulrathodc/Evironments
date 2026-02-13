@@ -84,6 +84,7 @@ my:
 management:
   endpoints:
     web:
+      base-path: /api/events/order/actuator
       exposure:
         include: health, info, metrics, prometheus
   endpoint:
@@ -101,7 +102,7 @@ management:
 
   observations:
     key-values:
-      application: order
+      application: commercebackend
 
   tracing:
     sampling:
@@ -113,7 +114,6 @@ management:
         type: none
       enabled: false
       endpoint: ""
-
 
 resilience4j:
   circuitbreaker:

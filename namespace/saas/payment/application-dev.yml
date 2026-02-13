@@ -141,77 +141,41 @@ my:
   framework:
     enabled: true
     apiKey: abc-123-secret
+
 management:
   endpoints:
     web:
+      base-path: /api/events/payment/actuator
       exposure:
         include: health, info, metrics, prometheus
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+
   metrics:
     distribution:
       percentiles-histogram:
         http:
           server:
             requests: true
+
   observations:
     key-values:
-      application: payment
-#  tracing:
-#    sampling:
-#      probability: 0.0
-#
-#  zipkin:
-#    tracing:
-#      propagation:
-#        type: none
-#      enabled: false
-#      endpoint: ""
+      application: commercebackend
+
   tracing:
-    enabled: true
     sampling:
-      probability: 1.0
+      probability: 0.0
 
   zipkin:
     tracing:
-      endpoint: http://tempo:9411/api/v2/spans
-#management:
-#  tracing:
-#    enabled: true
-#    otlp:
-#      endpoint: http://localhost:4318/v1/traces
-#      transport: http
-#management:
-#  tracing:
-#    enabled: true
-#    sampling:
-#      probability: 1.0
-#  otlp:
-#    tracing:
-#      enabled: true
-#      endpoint: http://tempo:4317
-#      protocol: grpc
-##      endpoint: http://localhost:55681
-##      protocol: http/protobuf
-#      export:
-#        enabled: true
-#    metrics:
-#      export:
-#        enabled: false  # disable OTLP metrics export
-#        step: 10s
-##  zipkin:
-##    enabled: true
-##    base-url: http://localhost:3200/api/traces
-##    sender: web
-##  otlp:
-##    tracing:
-##      endpoint: http://localhost:4317   # sends to Tempo
-##    endpoint: http://localhost:4317
-##    protocol: grpc
-#  endpoints:
-#    web:
-#      base-path: /actuator
-#      exposure:
-#        include: "*"
-##        include: health,info,refresh,prometheus
+      propagation:
+        type: none
+      enabled: false
+      endpoint: ""
+
 resilience4j:
   circuitbreaker:
     instances:
