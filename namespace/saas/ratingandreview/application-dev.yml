@@ -1,0 +1,144 @@
+brokers: 46.225.98.200:9092
+spring:
+  application:
+    name: ratingandreview
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  #    io.opentelemetry.instrumentation.spring.autoconfigure.OpenTelemetryAutoConfiguration
+  profiles:
+    active: dev
+  security:
+    jwt:
+      secret: my-super-secret-key-my-super-secret-key
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: MyStrongPassword
+  datasource:
+    url: jdbc:mysql://46.225.98.200:3306/appdb
+    username: appuser
+    password: StrongPassword123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: atulrathodc@gmail.com
+    password: "fvpm xuzo kdyu wldi"
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.connectiontimeout: 5000
+      mail.smtp.timeout: 5000
+      mail.smtp.writetimeout: 5000
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+    cache: false
+    charset: UTF-8
+    expose-spring-macro-helpers: true
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  cloud:
+    vault:
+      uri: https://vault.dev.designhunk.com/
+      token: root
+      kv:
+        enabled: true
+        backend: secret
+        default-context: example
+#server:
+#  tomcat:
+#    threads:
+#      max: 120
+#      connection-timeout: 20s
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+support:
+  email: atulrathodc@gmail.com
+  name: Atul Rathod
+
+stripe:
+  secret:
+    key: sk_test_XXXXXXXXXXXXXXXXXXXX
+
+my:
+  framework:
+    enabled: true
+    apiKey: abc-123-secret
+
+management:
+  endpoints:
+    web:
+      base-path: /api/events/ratingandreview/actuator
+      exposure:
+        include: health, info, metrics, prometheus
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+
+  observations:
+    key-values:
+      application: commercebackend
+
+  tracing:
+    sampling:
+      probability: 0.0
+
+  zipkin:
+    tracing:
+      propagation:
+        type: none
+      enabled: false
+      endpoint: ""
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      myService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 50s
+        permittedNumberOfCallsInHalfOpenState: 3
+  retry:
+    instances:
+      myService:
+        maxAttempts: 3
+        waitDuration: 2s
+eureka:
+  client:
+    service-url:
+      defaultZone: https://service-registry.designhunk.com/eureka/
+    #      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}
+  ssl:
+    enabled: false
+
