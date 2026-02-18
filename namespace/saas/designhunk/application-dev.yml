@@ -41,18 +41,30 @@ spring:
 #            port: 465
 #            class: javax.net.ssl.SSLSocketFactory
 #            fallback: false
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: atulrathodc@gmail.com
+#    password: "fvpm xuzo kdyu wldi"
+#    properties:
+#      mail.smtp.auth: true
+#      mail.smtp.starttls.enable: true
+#      mail.smtp.starttls.required: true
+#      mail.smtp.connectiontimeout: 5000
+#      mail.smtp.timeout: 5000
+#      mail.smtp.writetimeout: 5000
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: atulrathodc@gmail.com
-    password: "fvpm xuzo kdyu wldi"
+    host: mail.privateemail.com
+    username: sales@designhunk.com
+    password: Atul@1234
     properties:
-      mail.smtp.auth: true
-      mail.smtp.starttls.enable: true
-      mail.smtp.starttls.required: true
-      mail.smtp.connectiontimeout: 5000
-      mail.smtp.timeout: 5000
-      mail.smtp.writetimeout: 5000
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
   freemarker:
     template-loader-path: classpath:/templates/
     suffix: .ftl
