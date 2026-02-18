@@ -129,6 +129,10 @@ resilience4j:
       myService:
         maxAttempts: 3
         waitDuration: 2s
+aws:
+  region: eu-central-1
+  s3:
+    bucket: atul-fsn-upload-demo
 eureka:
   client:
     service-url:

@@ -28,10 +28,34 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+#  mail:
+#    host: smtp.gmail.com
+#    username: atulrathodc@gmail.com
+#    password: "fvpm xuzo kdyu wldi"
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          socketFactory:
+#            port: 465
+#            class: javax.net.ssl.SSLSocketFactory
+#            fallback: false
+#  mail:
+#    host: mail.privateemail.com
+#    port: 587
+#    username: your_email@yourdomain.com
+#    password: your_mail_password
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#            required: true
   mail:
-    host: smtp.gmail.com
-    username: atulrathodc@gmail.com
-    password: "fvpm xuzo kdyu wldi"
+    host: mail.privateemail.com
+    username: sales@designhunk.com
+    password: Atul@1234
     properties:
       mail:
         smtp:
