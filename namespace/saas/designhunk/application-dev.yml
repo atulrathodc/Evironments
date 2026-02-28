@@ -25,7 +25,7 @@ spring:
   second-datasource:
     url: jdbc:mysql://46.225.98.200:3306/appdb
     username: appuser
-    password: "${vault:/secret/designhunk/dbpassword}"
+    password: "${vault:designhunk/db/username#password}"
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -95,7 +95,7 @@ spring:
     allow-bean-definition-overriding: true
   cloud:
     vault:
-      uri: http://vault.local.designhunk.com/
+      uri: http://vault.designhunk.com/
       token: root
       kv:
         enabled: true
