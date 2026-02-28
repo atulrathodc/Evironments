@@ -25,7 +25,7 @@ spring:
   second-datasource:
     url: jdbc:mysql://46.225.98.200:3306/appdb
     username: appuser
-    password: "${vault:designhunk/db/username#password}"
+    password: "${vault:designhunk#dbpassword}"
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
