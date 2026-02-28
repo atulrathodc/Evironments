@@ -10,21 +10,51 @@ spring:
     active: dev
   security:
     jwt:
-      secret: my-super-secret-key-my-super-secret-key
+      secret: "${vault:designhunk#jwt_secret}"
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: "${vault:designhunk#google_clientid}"
+            clientSecret: "${vault:designhunk#google_secret}"
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+          facebook:
+            clientId: "${vault:designhunk#facebook_clientid}"
+            clientSecret: "${vault:designhunk#facebook_secret}"
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - public_profile
+          github:
+            clientId: "${vault:designhunk#jwt_secret}"
+            clientSecret: "${vault:designhunk#jwt_secret}"
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - user:email
+              - read:user
+        provider:
+          facebook:
+            authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
+            tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
+            userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+
   data:
     redis:
       host: localhost
       port: 6379
-      password: MyStrongPassword
+      password: "${vault:designhunk#redispassword}"
   datasource:
     url: jdbc:mysql://46.225.98.200:3306/appdb
-    username: appuser
+    username: "${vault:designhunk#dbusername}"
     password: "${vault:designhunk#dbpassword}"
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   second-datasource:
     url: jdbc:mysql://46.225.98.200:3306/appdb
-    username: appuser
+    username: "${vault:designhunk#dbusername}"
     password: "${vault:designhunk#dbpassword}"
     driver-class-name: com.mysql.cj.jdbc.Driver
 
@@ -63,8 +93,8 @@ spring:
   mail:
     host: mail.privateemail.com
     port: 587
-    username: sales@designhunk.com
-    password: Atul@1234
+    username: "${vault:designhunk#mail_username}"
+    password: "${vault:designhunk#mail_password}"
     properties:
       mail:
         smtp:
@@ -111,12 +141,12 @@ support:
 
 stripe:
   secret:
-    key: sk_test_XXXXXXXXXXXXXXXXXXXX
+    key: "${vault:designhunk#strip_key}"
 
 my:
   framework:
     enabled: true
-    apiKey: abc-123-secret
+    apiKey: "${vault:designhunk#myframeworkkey}"
 
 management:
   endpoints:
@@ -179,5 +209,20 @@ eureka:
     instance-id: ${spring.application.name}:${random.value}
   ssl:
     enabled: false
+app:
+  auth:
+    tokenSecret: "${vault:designhunk#app_auth_tokenSecret}"
+    tokenExpirationMsec: 864000000
+  cors:
+    allowedOrigins: http://localhost:3000,http://localhost:8080
+  oauth2:
+    # After successfully authenticating with the OAuth2 Provider,
+    # we'll be generating an auth token for the user and sending the token to the
+    # redirectUri mentioned by the client in the /oauth2/authorize request.
+    # We're not using cookies because they won't work well in mobile clients.
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth2/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
 
 
