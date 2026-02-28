@@ -29,8 +29,8 @@ spring:
               - email
               - public_profile
           github:
-            clientId: "${vault:designhunk#jwt_secret}"
-            clientSecret: "${vault:designhunk#jwt_secret}"
+            clientId: "${vault:designhunk#github_clientid}"
+            clientSecret: "${vault:designhunk#github_secret}"
             redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
               - user:email
