@@ -3,6 +3,14 @@ brokers: kafka.designhunk.com:9092
 spring:
   application:
     name: designhunk
+  cloud:
+    vault:
+      uri: http://vault.designhunk.com/
+      token: root
+      kv:
+        enabled: true
+        backend: secret
+        default-context: example
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   #    io.opentelemetry.instrumentation.spring.autoconfigure.OpenTelemetryAutoConfiguration
@@ -93,14 +101,7 @@ spring:
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
-  cloud:
-    vault:
-      uri: http://vault.designhunk.com/
-      token: root
-      kv:
-        enabled: true
-        backend: secret
-        default-context: example
+
 #server:
 #  tomcat:
 #    threads:
