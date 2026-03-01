@@ -24,7 +24,10 @@ spring:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 
   r2dbc:
-    url: r2dbc:mysql://appuser:StrongPassword123@46.225.98.200:3306/appdb
+    primary:
+      url: r2dbc:mysql://46.225.98.200:3306/appdb
+      username: appuser
+      password: StrongPassword123
 
   sql:
     init:
