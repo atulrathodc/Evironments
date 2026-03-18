@@ -145,7 +145,7 @@ stripe:
 
 my:
   framework:
-    enabled: false
+#    enabled: false
     apiKey: "${vault:designhunk#myframeworkkey}"
 
 management:
