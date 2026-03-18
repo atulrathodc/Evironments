@@ -102,7 +102,7 @@ stripe:
 
 my:
   framework:
-    enabled: false
+    enabled: true
     apiKey: abc-123-secret
 
 management:
