@@ -102,7 +102,7 @@ stripe:
 
 my:
   framework:
-    enabled: true
+    enabled: false
     apiKey: abc-123-secret
 
 management:
@@ -165,5 +165,6 @@ eureka:
     instance-id: ${spring.application.name}:${random.value}
   ssl:
     enabled: false
+
 
 
